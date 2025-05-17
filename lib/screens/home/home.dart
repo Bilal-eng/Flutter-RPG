@@ -17,6 +17,14 @@ class _HomeState extends State<Home> {
         child: Column(
           children: [
             Text('Character List'),
+            Text(
+              'Character List',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            Text(
+              'Character List',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             FilledButton(onPressed: () {}, child: Text('Create New')),
           ],
         ),
