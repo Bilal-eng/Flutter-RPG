@@ -12,7 +12,15 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Your Characters'), centerTitle: true),
-      body: Container(padding: EdgeInsets.all(16), child: Text('Home')),
+      body: Container(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Text('Character List'),
+            FilledButton(onPressed: () {}, child: Text('Create New')),
+          ],
+        ),
+      ),
     );
   }
 }
