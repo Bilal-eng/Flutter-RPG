@@ -11,6 +11,16 @@ class Create extends StatefulWidget {
 }
 
 class _CreateState extends State<Create> {
+  final _nameController = TextEditingController();
+  final _sloganController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _sloganController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +42,7 @@ class _CreateState extends State<Create> {
 
             // input for name and slogan
             TextField(
+              controller: _nameController,
               style: GoogleFonts.kanit(
                 textStyle: Theme.of(context).textTheme.bodyMedium,
               ),
@@ -43,6 +54,7 @@ class _CreateState extends State<Create> {
             ),
             const SizedBox(height: 20),
             TextField(
+              controller: _sloganController,
               style: GoogleFonts.kanit(
                 textStyle: Theme.of(context).textTheme.bodyMedium,
               ),
