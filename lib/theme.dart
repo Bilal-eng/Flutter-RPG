@@ -57,7 +57,7 @@ ThemeData primaryTheme = ThemeData(
   // input decoration theme
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
-    fillColor: AppColors.secondaryColor.withOpacity(0.5),
+    fillColor: AppColors.secondaryColor.withValues(alpha: 0.5),
     border: InputBorder.none,
     labelStyle: TextStyle(color: AppColors.textColor),
     prefixIconColor: AppColors.textColor,
