@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rpg/models/character.dart';
 import 'package:flutter_rpg/models/vocation.dart';
 import 'package:flutter_rpg/screens/create/vocation_card.dart';
+import 'package:flutter_rpg/shared/section_intro.dart';
 import 'package:flutter_rpg/shared/styled_button.dart';
 import 'package:flutter_rpg/shared/styled_text.dart';
 import 'package:flutter_rpg/theme.dart';
@@ -9,6 +10,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
+
+final vocations = [
+  Vocation.junkie,
+  Vocation.ninja,
+  Vocation.raider,
+  Vocation.wizard,
+];
 
 class Create extends StatefulWidget {
   const Create({super.key});
@@ -71,12 +79,10 @@ class _CreateState extends State<Create> {
           child: Column(
             children: [
               // Welcome message
-              Center(child: Icon(Icons.code, color: AppColors.primaryColor)),
-              const Center(child: StyledHeading('Welcome, new player.')),
-              const Center(
-                child: StyledText('Create a name & slogan for your character.'),
+              SectionIntro(
+                heading: 'Welcome, new player.',
+                subtext: 'Create a name & slogan for your character.',
               ),
-              const SizedBox(height: 30),
 
               // input for name and slogan
               TextField(
@@ -105,40 +111,28 @@ class _CreateState extends State<Create> {
               const SizedBox(height: 30),
 
               // select vocation title
-              Center(child: Icon(Icons.code, color: AppColors.primaryColor)),
-              const Center(child: StyledHeading('Choose a vocation.')),
-              const Center(
-                child: StyledText('This determines your available skills.'),
+              SectionIntro(
+                heading: 'Choose a vocation.',
+                subtext: 'This determines your available skills.',
               ),
-              const SizedBox(height: 30),
 
               // vocation cards
-              VocationCard(
-                selected: selectedVocation == Vocation.junkie,
-                onTap: updateVocation,
-                vocation: Vocation.junkie,
-              ),
-              VocationCard(
-                selected: selectedVocation == Vocation.ninja,
-                onTap: updateVocation,
-                vocation: Vocation.ninja,
-              ),
-              VocationCard(
-                selected: selectedVocation == Vocation.raider,
-                onTap: updateVocation,
-                vocation: Vocation.raider,
-              ),
-              VocationCard(
-                selected: selectedVocation == Vocation.wizard,
-                onTap: updateVocation,
-                vocation: Vocation.wizard,
+              Column(
+                children:
+                    vocations.map((vocation) {
+                      return VocationCard(
+                        selected: selectedVocation == vocation,
+                        onTap: updateVocation,
+                        vocation: vocation,
+                      );
+                    }).toList(),
               ),
 
               // good luck message
-              Center(child: Icon(Icons.code, color: AppColors.primaryColor)),
-              const Center(child: StyledHeading('Good Luck.')),
-              const Center(child: StyledText('And enjoy the journey....')),
-              const SizedBox(height: 30),
+              SectionIntro(
+                heading: 'Good Luck.',
+                subtext: 'And enjoy the journey....',
+              ),
 
               Center(
                 child: StyledButton(
