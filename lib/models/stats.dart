@@ -64,7 +64,7 @@ mixin Stats {
     _points = points;
 
     _health = stats['health'];
-    _attack = stats['attach'];
+    _attack = stats['attack'];
     _defense = stats['defense'];
     _skill = stats['skill'];
   }
