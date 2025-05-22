@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_rpg/models/skill.dart';
 import 'package:flutter_rpg/models/stats.dart';
 import 'package:flutter_rpg/models/vocation.dart';
@@ -43,6 +44,38 @@ class Character with Stats {
       'stats': statAsMap,
       'points': points,
     };
+  }
+
+  // character from firestore
+  factory Character.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
+    // get data from snapshot
+    final data = snapshot.data()!;
+
+    // make a character instance
+    Character character = Character(
+      name: data['name'],
+      slogan: data['slogan'],
+      id: snapshot.id,
+      vocation: Vocation.values.firstWhere(
+        (v) => v.toString() == data['vocation'],
+      ),
+    );
+
+    // update skills
+    for (String id in data['skills']) {
+      Skill skill = allSkills.firstWhere((element) => element.id == id);
+      character.updateSkills(skill);
+    }
+
+    // set isFav
+    if (data['isFav'] == true) {
+      character.toggleIsFav();
+    }
+
+    return character;
   }
 }
 
